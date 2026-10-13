@@ -1,0 +1,162 @@
+/* ===== 춤 동작 keyframes (transform만 사용해 GPU 가속) ===== */
+
+/* 그루브: 좌우 흔들기 + 살짝 튀기 */
+@keyframes groove {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  25%  { transform: translate3d(-18px, -14px, 0) rotate(-10deg) scale(1.03); }
+  50%  { transform: translate3d(0, 0, 0) rotate(0deg) scale(0.97, 1.03); }
+  75%  { transform: translate3d(18px, -14px, 0) rotate(10deg) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+
+/* 점프: 웅크렸다가 높이 뛰기 */
+@keyframes jump {
+  0%   { transform: translate3d(0, 0, 0) scale(1, 1); }
+  15%  { transform: translate3d(0, 6px, 0) scale(1.12, 0.86); }
+  45%  { transform: translate3d(0, -70px, 0) scale(0.92, 1.1); }
+  60%  { transform: translate3d(0, -70px, 0) scale(1, 1) rotate(4deg); }
+  85%  { transform: translate3d(0, 4px, 0) scale(1.1, 0.9); }
+  100% { transform: translate3d(0, 0, 0) scale(1, 1); }
+}
+
+/* 빙글빙글: 점프하며 한 바퀴 회전 */
+@keyframes spin {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  30%  { transform: translate3d(0, -30px, 0) rotate(140deg) scale(1.08); }
+  60%  { transform: translate3d(0, -30px, 0) rotate(300deg) scale(1.08); }
+  85%  { transform: translate3d(0, 0, 0) rotate(360deg) scale(0.95); }
+  100% { transform: translate3d(0, 0, 0) rotate(360deg) scale(1); }
+}
+
+/* 흔들흔들: 빠른 좌우 엉덩이춤 */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg) skewX(0deg); }
+  20% { transform: rotate(-14deg) skewX(6deg); }
+  40% { transform: rotate(12deg) skewX(-6deg); }
+  60% { transform: rotate(-8deg) skewX(4deg) translate3d(0, -8px, 0); }
+  80% { transform: rotate(6deg) skewX(-3deg); }
+}
+
+/* 그림자: 고양이가 뜨면 작아짐 */
+@keyframes shadow-pulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.35; }
+  50%      { transform: scaleX(0.7); opacity: 0.18; }
+}
+
+/* 음표: 위로 떠오르며 사라짐 */
+@keyframes float-note {
+  0%   { transform: translate3d(0, 0, 0) rotate(-10deg); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate3d(var(--drift, 20px), -120px, 0) rotate(15deg); opacity: 0; }
+}
+
+/* 조명 */
+@keyframes spotlight {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+
+/* ===== 무대 ===== */
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.spotlight {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 70%);
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+.spotlight.is-on {
+  animation: spotlight 2s ease-in-out infinite;
+}
+
+.cat-button {
+  --speed: 1;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 62%;
+  padding: 8% 0 0;
+  border-radius: 24px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.cat-dancer {
+  display: block;
+  width: 100%;
+  transform-origin: 50% 90%;
+  will-change: transform;
+  animation-duration: calc(1s / var(--speed));
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transition: transform 0.4s ease;
+}
+
+.cat-image {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.cat-button:hover .cat-image { transform: scale(1.04); }
+.cat-button:active .cat-image { transform: scale(0.96); }
+
+.dance-groove { animation-name: groove; }
+.dance-jump   { animation-name: jump; animation-duration: calc(1.1s / var(--speed)); }
+.dance-spin   { animation-name: spin; animation-duration: calc(1.6s / var(--speed)); }
+.dance-wiggle { animation-name: wiggle; animation-duration: calc(0.7s / var(--speed)); }
+
+.cat-shadow {
+  display: block;
+  width: 60%;
+  height: 14px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: #3a2e4f;
+  opacity: 0.3;
+  animation: shadow-pulse calc(1s / var(--speed)) ease-in-out infinite;
+}
+
+/* 정지 상태: 현재 프레임에서 멈춤 */
+.cat-button.is-paused .cat-dancer,
+.cat-button.is-paused .cat-shadow {
+  animation-play-state: paused;
+}
+
+/* ===== 음표 ===== */
+.notes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.note {
+  position: absolute;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  color: var(--accent);
+  opacity: 0;
+}
+.note.is-playing {
+  animation: float-note calc(2s / var(--speed)) ease-out infinite;
+}
+.note-1 { left: 12%; top: 45%; --drift: -20px; }
+.note-2 { right: 12%; top: 38%; --drift: 25px; animation-delay: 0.5s; color: #8a6bff; }
+.note-3 { left: 20%; top: 25%; --drift: 15px; animation-delay: 1s; color: #ffa53d; }
+.note-4 { right: 18%; top: 60%; --drift: -15px; animation-delay: 1.5s; color: #3cc3a3; }
+
+/* 모션 감소 설정 존중 */
+@media (prefers-reduced-motion: reduce) {
+  .cat-dancer { animation-duration: calc(3s / var(--speed)); }
+  .note.is-playing,
+  .spotlight.is-on { animation: none; }
+}

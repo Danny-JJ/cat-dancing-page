@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="춤추는 주황색 고양이">
+  <!-- 꼬리 -->
+  <path d="M150 190 C190 180 195 130 170 110" fill="none" stroke="#f29a4a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M175 118 C180 125 182 132 181 140" fill="none" stroke="#d9772b" stroke-width="5" stroke-linecap="round"/>
+  <!-- 몸통 -->
+  <ellipse cx="100" cy="175" rx="55" ry="50" fill="#f6a85b"/>
+  <ellipse cx="100" cy="185" rx="32" ry="34" fill="#fff4e6"/>
+  <!-- 팔 -->
+  <ellipse cx="50" cy="160" rx="13" ry="24" fill="#f29a4a" transform="rotate(35 50 160)"/>
+  <ellipse cx="150" cy="160" rx="13" ry="24" fill="#f29a4a" transform="rotate(-35 150 160)"/>
+  <!-- 발 -->
+  <ellipse cx="75" cy="222" rx="20" ry="12" fill="#fff4e6"/>
+  <ellipse cx="125" cy="222" rx="20" ry="12" fill="#fff4e6"/>
+  <!-- 귀 -->
+  <path d="M45 70 L52 15 L90 48 Z" fill="#f6a85b"/>
+  <path d="M155 70 L148 15 L110 48 Z" fill="#f6a85b"/>
+  <path d="M55 58 L59 30 L80 48 Z" fill="#ffb3c8"/>
+  <path d="M145 58 L141 30 L120 48 Z" fill="#ffb3c8"/>
+  <!-- 머리 -->
+  <ellipse cx="100" cy="85" rx="62" ry="52" fill="#f6a85b"/>
+  <!-- 이마 줄무늬 -->
+  <path d="M100 36 L100 54 M86 40 L90 55 M114 40 L110 55" stroke="#d9772b" stroke-width="5" stroke-linecap="round"/>
+  <!-- 눈 -->
+  <ellipse cx="76" cy="85" rx="10" ry="12" fill="#3a2e4f"/>
+  <ellipse cx="124" cy="85" rx="10" ry="12" fill="#3a2e4f"/>
+  <circle cx="79" cy="80" r="4" fill="#fff"/>
+  <circle cx="127" cy="80" r="4" fill="#fff"/>
+  <!-- 볼 -->
+  <ellipse cx="60" cy="105" rx="10" ry="6" fill="#ff8fb1" opacity="0.6"/>
+  <ellipse cx="140" cy="105" rx="10" ry="6" fill="#ff8fb1" opacity="0.6"/>
+  <!-- 코와 입 -->
+  <path d="M94 100 L106 100 L100 107 Z" fill="#ff6f91"/>
+  <path d="M100 107 Q100 116 90 116 M100 107 Q100 116 110 116" fill="none" stroke="#3a2e4f" stroke-width="3" stroke-linecap="round"/>
+  <!-- 수염 -->
+  <g stroke="#3a2e4f" stroke-width="2" stroke-linecap="round">
+    <path d="M40 98 L68 103 M40 110 L68 108"/>
+    <path d="M160 98 L132 103 M160 110 L132 108"/>
+  </g>
+</svg>
